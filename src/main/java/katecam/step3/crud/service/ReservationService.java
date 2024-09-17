@@ -6,7 +6,9 @@ import katecam.step3.crud.dto.ReservationDto;
 import katecam.step3.crud.enumdomain.CancelReason;
 import katecam.step3.crud.repository.ReservationRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ReservationService {
 
     private ReservationRepository reservationRepository;
