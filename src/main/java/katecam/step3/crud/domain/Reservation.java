@@ -1,5 +1,6 @@
 package katecam.step3.crud.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,7 +14,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import katecam.step3.crud.enumdomain.CancelReason;
@@ -21,15 +21,20 @@ import katecam.step3.crud.enumdomain.ReservationStatus;
 import katecam.step3.crud.enumdomain.ServiceType;
 import katecam.step3.crud.enumdomain.Transportation;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import lombok.ToString.Exclude;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@Builder
 @Table(name = "reservation")
 public class Reservation {
 
@@ -48,11 +53,12 @@ public class Reservation {
     @Column(name = "arrival_location", nullable = false) // ERD 컬럼 이름 변경 요망
     private String arrivalLocation; // 도착지
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
     @Column(name = "reservation_date", nullable = false) // ERD 컬럼 이름 변경 요망
     private LocalDateTime reservationDateTime; // 예약일시
 
     @Column(name = "created_time", nullable = false) // ERD 컬럼 이름 변경 요망
-    private LocalTime createdTime; // 생성시간
+    private LocalDateTime createdTime; // 생성시간
 
     @Column(name = "payment_status", nullable = false)
     private boolean paymentStatus; // 결제 상태
@@ -86,44 +92,11 @@ public class Reservation {
     private boolean mangerStatus; // 매니저 상태
 
     @OneToMany(mappedBy = "reservation")
+    @Exclude
     private List<Report> reports = new ArrayList<>(); // 리포트
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "accompany_id", referencedColumnName = "id")
+    @Exclude
     private Accompany accompany; // 동행
-
-
-    public Reservation(String departureLocation, String arrivalLocation,
-        LocalDateTime reservationDateTime, ServiceType serviceType, Transportation transportation,
-        int price) {
-        this.departureLocation = departureLocation;
-        this.arrivalLocation = arrivalLocation;
-        this.reservationDateTime = reservationDateTime;
-        this.serviceType = serviceType;
-        this.transportation = transportation;
-        this.price = price;
-    }
-
-    public Reservation(String departureLocation, String arrivalLocation,
-        LocalDateTime reservationDateTime, LocalTime createdTime, boolean paymentStatus,
-        ReservationStatus reservationStatus, CancelReason cancelReason, String cancelDetail,
-        LocalDateTime creationDate, ServiceType serviceType, Transportation transportation,
-        int price,
-        boolean mangerStatus, List<Report> reports, Accompany accompany) {
-        this.departureLocation = departureLocation;
-        this.arrivalLocation = arrivalLocation;
-        this.reservationDateTime = reservationDateTime;
-        this.createdTime = createdTime;
-        this.paymentStatus = paymentStatus;
-        this.reservationStatus = reservationStatus;
-        this.cancelReason = cancelReason;
-        this.cancelDetail = cancelDetail;
-        this.creationDate = creationDate;
-        this.serviceType = serviceType;
-        this.transportation = transportation;
-        this.price = price;
-        this.mangerStatus = mangerStatus;
-        this.reports = reports;
-        this.accompany = accompany;
-    }
 }

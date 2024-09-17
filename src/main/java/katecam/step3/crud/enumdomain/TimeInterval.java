@@ -4,12 +4,12 @@ import lombok.Getter;
 
 @Getter
 public enum TimeInterval {
-   THIRTY_MINUTE("30분"),
-   ONE_HOUR("1시간") ;
+    THIRTY_MINUTE("30분"),
+    ONE_HOUR("1시간");
 
-   private final String koreanName;
+    private final String koreanName;
 
-   TimeInterval(String koreanName) {
-      this.koreanName = koreanName;
-   }
+    TimeInterval(String koreanName) {
+        this.koreanName = koreanName;
+    }
 }
