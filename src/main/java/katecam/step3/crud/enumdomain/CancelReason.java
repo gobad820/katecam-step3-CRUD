@@ -6,6 +6,7 @@ public enum CancelReason {
     NOKCANCEL("보호자취소"),
     CHANGEOFMIND("단순변심"),// 단순 변심
     SECHEDULEDREBOOK("재예약예정"),// 재예약 예정
+    NONE("취소안함"),
     NONEMATCHED("매니저 매치 안됨");// 매니저 매치 안됨
 
     private final String krName;
