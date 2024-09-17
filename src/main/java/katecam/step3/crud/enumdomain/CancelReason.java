@@ -1,4 +1,4 @@
-package katecam.step3.crud.model.enummodel;
+package katecam.step3.crud.enumdomain;
 
 public enum CancelReason {
     PATIENTCANCEL("피진료자취소"),

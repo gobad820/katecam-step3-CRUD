@@ -1,4 +1,4 @@
-package katecam.step3.crud.model.enummodel;
+package katecam.step3.crud.enumdomain;
 
 public enum ServiceType {
     // 동행, 진료, 응급

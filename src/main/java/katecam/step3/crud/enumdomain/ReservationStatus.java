@@ -1,4 +1,4 @@
-package katecam.step3.crud.model.enummodel;
+package katecam.step3.crud.enumdomain;
 
 public enum ReservationStatus {
     // RESERVATIONNIL("예약없음"),
