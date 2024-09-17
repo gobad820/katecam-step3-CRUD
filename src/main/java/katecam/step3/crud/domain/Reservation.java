@@ -91,4 +91,39 @@ public class Reservation {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "accompany_id", referencedColumnName = "id")
     private Accompany accompany; // 동행
+
+
+    public Reservation(String departureLocation, String arrivalLocation,
+        LocalDateTime reservationDateTime, ServiceType serviceType, Transportation transportation,
+        int price) {
+        this.departureLocation = departureLocation;
+        this.arrivalLocation = arrivalLocation;
+        this.reservationDateTime = reservationDateTime;
+        this.serviceType = serviceType;
+        this.transportation = transportation;
+        this.price = price;
+    }
+
+    public Reservation(String departureLocation, String arrivalLocation,
+        LocalDateTime reservationDateTime, LocalTime createdTime, boolean paymentStatus,
+        ReservationStatus reservationStatus, CancelReason cancelReason, String cancelDetail,
+        LocalDateTime creationDate, ServiceType serviceType, Transportation transportation,
+        int price,
+        boolean mangerStatus, List<Report> reports, Accompany accompany) {
+        this.departureLocation = departureLocation;
+        this.arrivalLocation = arrivalLocation;
+        this.reservationDateTime = reservationDateTime;
+        this.createdTime = createdTime;
+        this.paymentStatus = paymentStatus;
+        this.reservationStatus = reservationStatus;
+        this.cancelReason = cancelReason;
+        this.cancelDetail = cancelDetail;
+        this.creationDate = creationDate;
+        this.serviceType = serviceType;
+        this.transportation = transportation;
+        this.price = price;
+        this.mangerStatus = mangerStatus;
+        this.reports = reports;
+        this.accompany = accompany;
+    }
 }
