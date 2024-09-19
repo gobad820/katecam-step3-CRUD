@@ -1,22 +1,18 @@
 package katecam.step3.crud.annotation;
 
-import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import katecam.step3.crud.validator.IntegerValidator;
 
-@ValidInteger
 @Documented
-@Constraint(validatedBy = IntegerValidator.class)
-@Target({ElementType.FIELD})
+@Target({ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidPrice {
+public @interface ValidInteger {
 
-    String message() default "유효하지 않은 가격입니다.";
+    String message() default "유효하지 않은 정수입니다.";
 
     Class<?>[] groups() default {};
 

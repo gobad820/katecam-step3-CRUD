@@ -55,6 +55,7 @@ public class ReservationService {
             .filter(reason -> reason.getKrName().equals(cancelDto.cancelReason())).findFirst()
             .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 취소 타입입니다."));
         addCancelResasonAndDetail(canceledReservation, cancelReason, cancelDto.cancelDetail()); // 예약에 취소 사유와 상세 정보 추가
+        reservationRepository.save(canceledReservation);
         return canceledReservation;
     }
 

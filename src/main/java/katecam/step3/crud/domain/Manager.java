@@ -5,13 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
-import katecam.step3.crud.enumdomain.MealTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,33 +18,32 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "report")
-public class Report {
+@Builder
+@Table(name = "managers")
+public class Manager extends User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "reservation_id")
-    private Reservation reservation;
+    @Column(name = "name",length = 50, nullable = false)
+    private String name;
 
-    @OneToMany(mappedBy = "report")
-    private List<TimeOfDays> timeOfDays = new ArrayList<>();
+    @Column(name = "profile_image", nullable = false)
+    private String profileImage;
 
-    @Column(name = "doctor_summary")
-    private String doctorSummary;
+    @Column(name = "carrer", nullable = false, length = 256)
+    private String carrer;
 
-    @Column(name = "frequency")
-    private int frequency;
+    @Column(name = "comment", nullable = false,length = 256)
+    private String comment;
 
-    @Column(name = "meal_time")
-    private MealTime mealTime;
+    @Column(name = "working_region", nullable = false,length = 256)
+    private String workingRegion;
 
-    @Column(name = "time_of_day")
-    private String timeOfDay;
+    @OneToMany(mappedBy = "manager")
+    private List<Reservation> reservations = new ArrayList<>();
 }
