@@ -6,10 +6,12 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -33,9 +35,9 @@ import lombok.ToString.Exclude;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
 @Table(name = "reservation")
+@ToString
 public class Reservation {
 
     @Id
@@ -46,6 +48,9 @@ public class Reservation {
     // private Long UserId;
 
     // private Long ManagerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id", nullable = false)
+    private Manager manager;
 
     @Column(name = "departure_location", nullable = false) // ERD 컬럼 이름 변경 요망
     private String departureLocation; // 출발지
@@ -95,8 +100,11 @@ public class Reservation {
     @Exclude
     private List<Report> reports = new ArrayList<>(); // 리포트
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "accompany_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "reservation")
     @Exclude
-    private Accompany accompany; // 동행
+    private List<Accompany> accompany = new ArrayList<>(); // 동행
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "patient_id", referencedColumnName = "id")
+    private Patient patient;
 }

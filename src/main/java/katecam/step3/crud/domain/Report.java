@@ -2,8 +2,6 @@ package katecam.step3.crud.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,13 +12,18 @@ import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 import katecam.step3.crud.enumdomain.MealTime;
-import katecam.step3.crud.enumdomain.TimeInterval;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "report")
 public class Report {
 
@@ -45,7 +48,6 @@ public class Report {
     @Column(name = "meal_time")
     private MealTime mealTime;
 
-    @Column(name = "time_interval")
-    @Enumerated(value = EnumType.STRING)
-    private TimeInterval timeInterval;
+    @Column(name = "time_of_day")
+    private String timeOfDay;
 }
